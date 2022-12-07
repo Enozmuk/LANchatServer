@@ -1,2 +1,2 @@
 # LANchatServer
-A project for me to explore sockets and multithreading.
+A project for me to explore sockets and multithreading in C++.
