@@ -1,5 +1,5 @@
 {
-  "name": "win_client_frontend",
+  "name": "chat_client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
