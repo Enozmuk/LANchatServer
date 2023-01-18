@@ -7,6 +7,8 @@
 #include <string.h> // needed for memset
 #include <string>
 #include <errno.h>
+#include <mutex>
+#include <condition_variable>
 
 #include "clientConn.hpp"
 
@@ -18,6 +20,10 @@ class simpleServer {
 
         int port;
         int listenFD = -1;
+
+        std::condition_variable running;
+
+        std::mutex runLock; 
 
     public:
         simpleServer(int port);
@@ -32,8 +38,8 @@ class simpleServer {
         
         // start listen
         // no thread for accept, just poll() the fd to see if there is anything to read
-        int run();
+        void run();
 
-        int getListenSocket() {return listenFD;}
+        int getListenSocket();
 
-}
+};

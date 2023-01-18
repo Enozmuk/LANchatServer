@@ -3,6 +3,7 @@
 
 simpleServer::simpleServer(int listeningPort) {
     port = listeningPort;
+    
 }
 
 simpleServer::~simpleServer() {
@@ -17,16 +18,13 @@ int simpleServer::initialize() {
     struct sockaddr_in serv_addr;
     memset(&serv_addr, '\0', sizeof(serv_addr));
 
-    char sendBuff[1024];
-    memset(sendBuff, '\0', sizeof(sendBuff));
-
     listenFD = socket(AF_INET, SOCK_STREAM, 0);
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     serv_addr.sin_port = htons(port);
 
     bind(listenFD, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
-    listen(listenFD, 10); // TODO: LEAVE MAX CONNECTIONS AT 10?
+    listen(listenFD, 10); // TODO: LEAVE MAX WAITING CONNECTIONS AT 10?
 
     return 0;
 }
@@ -36,4 +34,19 @@ void simpleServer::closeConnections() {
     {
         client.close();
     }
+}
+
+int simpleServer::getListenSocket() {
+    return listenFD;
+}
+
+void simpleServer::run() {
+
+    while(true) {
+        std::unique_lock<std::mutex> lk(runLock);
+
+    }
+
+
+
 }

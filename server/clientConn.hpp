@@ -49,4 +49,6 @@ class clientConn {
         std::string getNextMessage(); // send message on top of recv queue to server
         std::string queueSendMessage(); // let server queue another message to send
 
-}
+        int close(); // closes this connections
+
+};
